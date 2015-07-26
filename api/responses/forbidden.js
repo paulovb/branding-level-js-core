@@ -2,23 +2,25 @@
  * 403 (Forbidden) Handler
  *
  * Usage:
- * return this.res.forbidden();
- * return this.res.forbidden(err);
- * return this.res.forbidden(err, 'some/specific/forbidden/view');
+ * return res.forbidden();
+ * return res.forbidden(err);
+ * return res.forbidden(err, 'some/specific/forbidden/view');
  *
  * e.g.:
  * ```
- * return this.res.forbidden('Access denied.');
+ * return res.forbidden('Access denied.');
  * ```
  */
 
 module.exports = function forbidden(data, options) {
 
-  // Get access to `this.req`, `this.res`, & `sails`
-  var sails = this.req._sails;
+  // Get access to `req`, `res`, & `sails`
+  var req = this.req;
+  var res = this.res;
+  var sails = req._sails;
 
   // Set status code
-  this.res.status(403);
+  res.status(403);
 
   // Log error to console
   if (data !== undefined) {
@@ -34,8 +36,8 @@ module.exports = function forbidden(data, options) {
   }
 
   // If the user-agent wants JSON, always respond with JSON
-  if (this.req.wantsJSON) {
-    return this.res.jsonx(data);
+  if (req.wantsJSON) {
+    return res.jsonx(data);
   }
 
   // If second argument is a string, we take that to mean it refers to a view.
@@ -46,13 +48,13 @@ module.exports = function forbidden(data, options) {
   // Otherwise try to guess an appropriate view, or if that doesn't
   // work, just send JSON.
   if (options.view) {
-    return this.res.view(options.view, {data: data});
+    return res.view(options.view, {data: data});
   }
 
   // If no second argument provided, try to serve the default view,
   // but fall back to sending JSON(P) if any errors occur.
   else {
-    return this.res.view('403', {data: data}, function (err, html) {
+    return res.view('403', {data: data}, function (err, html) {
 
       // If a view error occured, fall back to JSON(P).
       if (err) {
@@ -60,16 +62,16 @@ module.exports = function forbidden(data, options) {
         // Additionally:
         // If the view was missing, ignore the error but provide a verbose log.
         if (err.code === 'E_VIEW_FAILED') {
-          sails.log.verbose('this.res.forbidden() :: Could not locate view for error page (sending JSON instead).  Details: ', err);
+          sails.log.verbose('res.forbidden() :: Could not locate view for error page (sending JSON instead).  Details: ', err);
         }
         // Otherwise, if this was a more serious error, log to the console with the details.
         else {
-          sails.log.warn('this.res.forbidden() :: When attempting to render error page view, an error occured (sending JSON instead).  Details: ', err);
+          sails.log.warn('res.forbidden() :: When attempting to render error page view, an error occured (sending JSON instead).  Details: ', err);
         }
-        return this.res.jsonx(data);
+        return res.jsonx(data);
       }
 
-      return this.res.send(html);
+      return res.send(html);
     });
   }
 };

@@ -2,13 +2,13 @@
  * 400 (Bad Request) Handler
  *
  * Usage:
- * return this.res.badRequest();
- * return this.res.badRequest(data);
- * return this.res.badRequest(data, 'some/specific/badRequest/view');
+ * return res.badRequest();
+ * return res.badRequest(data);
+ * return res.badRequest(data, 'some/specific/badRequest/view');
  *
  * e.g.:
  * ```
- * return this.res.badRequest(
+ * return res.badRequest(
  *   'Please choose a valid `password` (6-12 characters)',
  *   'trial/signup'
  * );
@@ -17,11 +17,13 @@
 
 module.exports = function badRequest(data, options) {
 
-  // Get access to `this.req`, `this.res`, & `sails`
-  var sails = this.req._sails;
+  // Get access to `req`, `res`, & `sails`
+  var req = this.req;
+  var res = this.res;
+  var sails = req._sails;
 
   // Set status code
-  this.res.status(400);
+  res.status(400);
 
   // Log error to console
   if (data !== undefined) {
@@ -37,8 +39,8 @@ module.exports = function badRequest(data, options) {
   }
 
   // If the user-agent wants JSON, always respond with JSON
-  if (this.req.wantsJSON) {
-    return this.res.jsonx(data);
+  if (req.wantsJSON) {
+    return res.jsonx(data);
   }
 
   // If second argument is a string, we take that to mean it refers to a view.
@@ -49,14 +51,14 @@ module.exports = function badRequest(data, options) {
   // Otherwise try to guess an appropriate view, or if that doesn't
   // work, just send JSON.
   if (options.view) {
-    return this.res.view(options.view, {data: data});
+    return res.view(options.view, {data: data});
   }
 
   // If no second argument provided, try to serve the implied view,
   // but fall back to sending JSON(P) if no view can be inferred.
   else {
-    return this.res.guessView({data: data}, function couldNotGuessView() {
-      return this.res.jsonx(data);
+    return res.guessView({data: data}, function couldNotGuessView() {
+      return res.jsonx(data);
     });
   }
 
