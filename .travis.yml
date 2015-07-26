@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - "0.10"
+
+addons:
+    code_climate:
+        repo_token: 216e5436d62aa830f77c41b25592f46a3cb01b9133d864e01b73737f7e71c81d
+
+after_success:
+  - npm run coveralls
+  - npm run codeclimate
