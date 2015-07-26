@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.1.0",
-    "coveralls": "^2.11.3",
     "expect.js": "^0.3.1",
     "istanbul": "^0.3.17",
     "jscoverage": "^0.5.9",
@@ -43,7 +42,6 @@
     "start": "node app.js",
     "debug": "node debug app.js",
     "test": "mocha test/bootstrap.test.js test/unit/**/*.test.js",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha test/bootstrap.test.js test/unit/**/*.test.js && cat ./coverage/lcov.info | coveralls",
     "codeclimate": "istanbul cover ./node_modules/mocha/bin/_mocha test/bootstrap.test.js test/unit/**/*.test.js && cat ./coverage/lcov.info && CODECLIMATE_REPO_TOKEN=216e5436d62aa830f77c41b25592f46a3cb01b9133d864e01b73737f7e71c81d codeclimate-test-reporter < ./coverage/lcov.info"
   },
   "main": "app.js",
