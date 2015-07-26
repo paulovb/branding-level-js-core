@@ -57,7 +57,7 @@ module.exports = function forbidden (data, options) {
     if (err) {
       //
       // Additionally:
-      // • If the view was missing, ignore the error but provide a verbose log.
+      // If the view was missing, ignore the error but provide a verbose log.
       if (err.code === 'E_VIEW_FAILED') {
         sails.log.verbose('this.res.forbidden() :: Could not locate view for error page (sending JSON instead).  Details: ',err);
       }
