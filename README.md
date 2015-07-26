@@ -1,7 +1,7 @@
 # brading-level-js-core
 
 [![Build Status](https://travis-ci.org/paulovb/branding-level-js-core.svg?branch=master)](https://travis-ci.org/paulovb/branding-level-js-core)
-[![Code Climate](https://codeclimate.com/repos/55ab2bdae30ba0046500596a/badges/32229968dc493a3b0961/gpa.svg)](https://codeclimate.com/repos/55ab2bdae30ba0046500596a/feed)
+[![Code Climate](https://codeclimate.com/repos/55b4643369568040f501b9a7/badges/c9d06e1639612cca7a2f/gpa.svg)](https://codeclimate.com/repos/55b4643369568040f501b9a7/feed)
 [![Test Coverage](https://codeclimate.com/repos/55b4643369568040f501b9a7/badges/c9d06e1639612cca7a2f/coverage.svg)](https://codeclimate.com/repos/55b4643369568040f501b9a7/coverage)
 [![License MIT](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
 
