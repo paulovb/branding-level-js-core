@@ -42,7 +42,7 @@
     "start": "node app.js",
     "debug": "node debug app.js",
     "test": "mocha test/bootstrap.test.js test/unit/**/*.test.js",
-    "codeclimate": "istanbul cover ./node_modules/mocha/bin/_mocha test/bootstrap.test.js test/unit/**/*.test.js && cat ./coverage/lcov.info && CODECLIMATE_REPO_TOKEN=216e5436d62aa830f77c41b25592f46a3cb01b9133d864e01b73737f7e71c81d codeclimate-test-reporter < ./coverage/lcov.info"
+    "codeclimate": "istanbul cover ./node_modules/mocha/bin/_mocha test/bootstrap.test.js test/unit/**/*.test.js && cat ./coverage/lcov.info && CODECLIMATE_REPO_TOKEN=b6fc5f5f95fc3a2c0373a7f2d70929a4fe5d3c0845eab7c25d09ad4a526f8b65 codeclimate-test-reporter < ./coverage/lcov.info"
   },
   "main": "app.js",
   "repository": {
