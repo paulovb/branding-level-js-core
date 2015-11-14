@@ -1,0 +1,97 @@
+<body class="bg-faded p-t-md">
+
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <span class="icon-logo"></span>
+      <span class="sr-only">Land.io</span>
+    </a>
+    <a class="navbar-toggler hidden-md-up pull-right" data-toggle="collapse" href="#collapsingNavbar" aria-expanded="false" aria-controls="collapsingNavbar">
+      &#9776;
+    </a>
+    <a class="navbar-toggler navbar-toggler-custom hidden-md-up pull-right" data-toggle="collapse" href="#collapsingMobileUser" aria-expanded="false" aria-controls="collapsingMobileUser">
+      <span class="icon-user"></span>
+    </a>
+    <div id="collapsingNavbar" class="collapse navbar-toggleable-custom" role="tabpanel" aria-labelledby="collapsingNavbar">
+      <ul class="nav navbar-nav pull-right">
+
+        <li class="nav-item nav-item-toggable active">
+          <a class="nav-link" href="/">Início <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item nav-item-toggable">
+          <a class="nav-link" href="mailto:paulo.bischof@catolicasc.org.br">Saiba mais</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container" style="padding-top: 120px">
+  <div class="row">
+
+    <h1 class="display-2 text-center"><%- marca %></h1>
+
+    <div class="clearfix hidden-xl-up"></div>
+
+    <div class="col-md-4 col-md-offset-4">
+      <div class="card card-chart">
+        <div id="chart-holder" class="center-block" data-active="<%- indicador %>">
+          <canvas id="chart-area" class="center-block" width="200" height="200"></canvas>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item complete">
+            <span class="label pull-right"><%- positivo %></span>
+            <span class="icon-status status-completed"></span> Positivo
+          </li>
+          <li class="list-group-item">
+            <span class="label pull-right"><%- negativo %></span>
+            <span class="icon-status status-fail"></span> Negativo
+          </li>
+          <li class="list-group-item">
+            <span class="label pull-right"><%- neutro %></span>
+            <span class="icon-status status-backlog"></span> Neutro
+          </li>
+        </ul>
+      </div>
+      <hr class="invisible">
+    </div>
+  </div>
+</div>
+
+<script src="/js/plugins/chart.js"></script>
+
+<script>
+  function donutChart() {
+    var doughnutData = [
+      {
+        value: <%- positivo %>,
+        color:"#5e98e3",
+        highlight: "#424753",
+        label: "Positivo"
+      },
+      {
+        value: <%- negativo %>,
+        color: "#dc4e41",
+        highlight: "#424753",
+        label: "Negativo"
+      }
+    ];
+
+    window.onload = function(){
+      var c = document.getElementById("chart-area");
+      if (c != null) {
+        var ctx = c.getContext("2d");
+        window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {
+          responsive : true,
+          percentageInnerCutout : 80
+        });
+      } else {
+        return false
+      }
+    };
+  }
+
+  donutChart();
+
+
+</script>

@@ -1,10 +1,3 @@
-/**
- * Brand.js
- *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
- * @docs        :: http://sailsjs.org/#!documentation/models
- */
-
 module.exports = {
 
   attributes: {
@@ -19,6 +12,16 @@ module.exports = {
     },
     slug: {
       type: 'string'
+    },
+
+    mentions: {
+      collection: 'mention',
+      via: 'brand'
+    },
+
+    beforeCreate: function (values, cb) {
+      values.slug = slug(values.name).toLowerCase();
+      cb();
     }
 
   }
